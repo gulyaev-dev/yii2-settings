@@ -26,6 +26,8 @@ use \xti\settings\models\Setting;
     <?= $form->field($model, 'key')->textInput(['maxlength' => 255]) ?>
 
     <?= $form->field($model, 'value')->textarea(['rows' => 6]) ?>
+    
+    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'active')->checkbox(['value' => 1]) ?>
 

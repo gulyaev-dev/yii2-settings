@@ -28,11 +28,11 @@ interface SettingInterface
      * @param $section
      * @param $key
      * @param $value
+     * @param $description
      * @param $type
      * @return bool
-     * @throws \yii\base\InvalidConfigException
      */
-    public function setSetting($section, $key, $value, $type);
+    public function setSetting($section, $key, $value, $description, $type);
 
     /**
      * Deletes a settings

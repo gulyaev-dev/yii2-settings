@@ -59,6 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'key',
                 'value:ntext',
+                'description:ntext',
                 [
                     'class' => '\pheme\grid\ToggleColumn',
                     'attribute' => 'active',

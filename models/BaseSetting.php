@@ -24,6 +24,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $section
  * @property string $key
  * @property string $value
+ * @property string $description
  * @property boolean $active
  * @property string $created
  * @property string $modified
@@ -47,7 +48,7 @@ class BaseSetting extends ActiveRecord implements SettingInterface
     {
         return [
             [['value'], 'string'],
-            [['section', 'key'], 'string', 'max' => 255],
+            [['section', 'key', 'description'], 'string', 'max' => 255],
             [
                 ['key'],
                 'unique',
@@ -103,7 +104,7 @@ class BaseSetting extends ActiveRecord implements SettingInterface
     /**
      * @inheritdoc
      */
-    public function setSetting($section, $key, $value, $type = null)
+    public function setSetting($section, $key, $value, $description = null, $type = null)
     {
         $model = static::findOne(['section' => $section, 'key' => $key]);
 
@@ -114,6 +115,7 @@ class BaseSetting extends ActiveRecord implements SettingInterface
         $model->section = $section;
         $model->key = $key;
         $model->value = strval($value);
+        $model->description = strval($description);
 
         if ($type !== null) {
             $model->type = $type;

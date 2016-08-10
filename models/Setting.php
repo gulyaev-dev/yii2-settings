@@ -68,7 +68,7 @@ class Setting extends BaseSetting
     {
         return [
             [['value'], 'string'],
-            [['section', 'key'], 'string', 'max' => 255],
+            [['section', 'key', 'description'], 'string', 'max' => 255],
             [
                 ['key'],
                 'unique',
@@ -119,6 +119,7 @@ class Setting extends BaseSetting
             'section' => Module::t('settings', 'Section'),
             'key' => Module::t('settings', 'Key'),
             'value' => Module::t('settings', 'Value'),
+            'description' => Module::t('settings', 'Description'),
             'active' => Module::t('settings', 'Active'),
             'created' => Module::t('settings', 'Created'),
             'modified' => Module::t('settings', 'Modified'),

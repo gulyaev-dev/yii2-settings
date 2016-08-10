@@ -143,7 +143,7 @@ class Settings extends Component
      * @param null $type
      * @return boolean
      */
-    public function set($key, $value, $section = null, $type = null)
+    public function set($key, $value, $section = null, $description = null, $type = null)
     {
         if (is_null($section)) {
             $pieces = explode('.', $key);
@@ -151,7 +151,7 @@ class Settings extends Component
             $key = $pieces[1];
         }
 
-        if ($this->model->setSetting($section, $key, $value, $type)) {
+        if ($this->model->setSetting($section, $key, $value, $description, $type)) {
             if ($this->clearCache()) {
                 return true;
             }

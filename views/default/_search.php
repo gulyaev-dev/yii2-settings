@@ -32,6 +32,8 @@ use xti\settings\Module;
     <?= $form->field($model, 'key') ?>
 
     <?= $form->field($model, 'value') ?>
+    
+    <?= $form->field($model, 'description') ?>
 
     <?= $form->field($model, 'active')->checkbox() ?>
 
