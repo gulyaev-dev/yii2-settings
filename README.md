@@ -72,9 +72,9 @@ $value = $settings->get('key', 'section');
 
 $settings->set('section.key', 'value');
 
-$settings->set('section.key', 'value', null, 'string');
+$settings->set('section.key', 'value', null, null, 'string');
 
-$settings->set('key', 'value', 'section', 'integer');
+$settings->set('key', 'value', 'section', 'description', 'integer');
 
 // Automatically called on set();
 $settings->clearCache();

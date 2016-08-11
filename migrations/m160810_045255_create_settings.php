@@ -8,7 +8,7 @@
 /**
  * @author Aris Karageorgos <aris@phe.me>
  */
-class m140618_045255_create_settings extends \yii\db\Migration
+class m160810_045255_create_settings extends \yii\db\Migration
 {
     public function up()
     {

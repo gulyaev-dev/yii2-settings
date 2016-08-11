@@ -7,7 +7,7 @@
 
 use yii\db\Migration;
 
-class m151126_091910_add_unique_index extends Migration
+class m160811_091910_add_unique_index extends Migration
 {
     public function safeUp()
     {

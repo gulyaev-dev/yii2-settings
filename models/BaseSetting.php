@@ -115,7 +115,9 @@ class BaseSetting extends ActiveRecord implements SettingInterface
         $model->section = $section;
         $model->key = $key;
         $model->value = strval($value);
-        $model->description = strval($description);
+
+        if($description !== null)
+            $model->description = strval($description);
 
         if ($type !== null) {
             $model->type = $type;

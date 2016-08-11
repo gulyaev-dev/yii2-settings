@@ -140,6 +140,7 @@ class Settings extends Component
      * @param $key
      * @param $value
      * @param null $section
+     * @param null $description
      * @param null $type
      * @return boolean
      */
