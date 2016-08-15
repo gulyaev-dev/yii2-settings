@@ -11,13 +11,15 @@ use xti\settings\Module;
 use xti\settings\models\Setting;
 use yii\helpers\ArrayHelper;
 use yii\widgets\Pjax;
+use yii\helpers\Url;
+use backend\assets\EditableAsset;
 
 /**
  * @var yii\web\View $this
  * @var xti\settings\models\SettingSearch $searchModel
  * @var yii\data\ActiveDataProvider $dataProvider
  */
-
+EditableAsset::register($this);
 $this->title = Module::t('settings', 'Settings');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -58,7 +60,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     ),
                 ],
                 'key',
-                'value:ntext',
+                [
+                    'attribute' => 'value',
+                    'value' => function($model){
+                        return '
+                        <span class="editable" data-name="value" data-value="'.$model->value.'" data-setting_id="'.$model->id.'">'
+                        .$model->value.
+                        '</span>';
+                    },
+                    'format' => 'raw'
+                ],
                 'description:ntext',
                 [
                     'class' => '\pheme\grid\ToggleColumn',
@@ -69,5 +80,39 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]
     ); ?>
-    <?php Pjax::end(); ?>
+    <?php Pjax::end();
+    $this->registerJs("
+	$('.editable').each(function() {
+        $(this).editable({
+            mode: 'popup',
+            url: '".Url::to('/settings/ajax/update-field')."',
+            pk: Number($(this).data('setting_id')),
+            params : {
+                ".Yii::$app->request->csrfParam." : '". Yii::$app->request->getCsrfToken()."'
+            },
+            inputclass: 'input_500',
+            success: function(response, newValue) {
+                if(response.is_success === 1) {
+                    return true;
+                } else {
+                    error_text = '';
+                    if (typeof response.errors == 'object') {
+                        for(key in response.errors) {
+                            error_text += response.errors[key];
+                        }
+                    } else {
+                        error_text = response.errors;
+                    }
+                    return error_text;
+                }
+            },
+            ajaxOptions: {
+                type: 'post',
+                dataType: 'json'
+            }
+        })
+});
+");
+    $this->registerCss(".editableform .form-control.input_500 {width:500px}");
+    ?>
 </div>
