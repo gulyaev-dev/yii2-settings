@@ -56,6 +56,13 @@ class Settings extends Component
     public $cacheKey = 'xti/settings';
 
     /**
+     * To be used by the cache component.
+     *
+     * @var integer the number of seconds in which the cached value will expire. 0 means never expire.
+     */
+    public $duration = 60;
+
+    /**
      * Holds a cached copy of the data for the current request
      *
      * @var mixed
@@ -224,6 +231,8 @@ class Settings extends Component
     /**
      * Clears the settings cache on demand.
      * If you haven't configured cache this does nothing.
+     * If you use "fileCache", it will delete the cache only the application in which it was called.
+     * To avoid unlimited cache, set $this->duration
      *
      * @return boolean True if the cache key was deleted and false otherwise
      */
@@ -253,7 +262,7 @@ class Settings extends Component
 
                 if ($data === false) {
                     $data = $this->model->getSettings();
-                    $this->cache->set($this->cacheKey, $data);
+                    $this->cache->set($this->cacheKey, $data, $this->duration);
                 }
             } else {
                 $data = $this->model->getSettings();
