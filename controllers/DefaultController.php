@@ -12,17 +12,17 @@ use Yii;
 use xti\settings\models\Setting;
 use xti\settings\models\SettingSearch;
 use pheme\grid\actions\ToggleAction;
-use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * SettingsController implements the CRUD actions for Setting model.
  *
  * @author Aris Karageorgos <aris@phe.me>
  */
-class DefaultController extends Controller
+class DefaultController extends \backend\controllers\BaseAccess
 {
     /**
      * Defines the controller behaviors
@@ -30,23 +30,14 @@ class DefaultController extends Controller
      */
     public function behaviors()
     {
-        return [
+        return ArrayHelper::merge(parent::behaviors(), [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => $this->module->accessRoles,
-                    ],
-                ],
-            ],
-        ];
+        ]);
     }
 
     public function actions()

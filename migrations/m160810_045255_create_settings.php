@@ -12,6 +12,12 @@ class m160810_045255_create_settings extends \yii\db\Migration
 {
     public function up()
     {
+        $tableOptions = null;
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+        }
+
         $this->createTable(
             '{{%settings}}',
             [
@@ -24,7 +30,8 @@ class m160810_045255_create_settings extends \yii\db\Migration
                 'active' => $this->boolean(),
                 'created' => $this->dateTime(),
                 'modified' => $this->dateTime(),
-            ]
+            ],
+            $tableOptions
         );
     }
 

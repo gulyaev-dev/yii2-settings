@@ -29,7 +29,7 @@ class Module extends \yii\base\Module
     /**
      * @var null|array The roles which have access to module controllers, eg. ['admin']. If set to `null`, there is no accessFilter applied
      */
-    public $accessRoles = null;
+    public $accessRoles = null; // instead of this, use BaseAccess class
 
     /**
      * Init module

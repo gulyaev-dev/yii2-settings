@@ -3,11 +3,10 @@ namespace xti\settings\controllers;
 
 use Yii;
 use xti\settings\models\Setting;
-use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 
-class AjaxController extends Controller
+class AjaxController extends \backend\controllers\BaseAccess
 {
     public function actionUpdateField()
     {
