@@ -17,7 +17,8 @@
     "require": {
         "yiisoft/yii2": ">=2.0.6",
         "pheme/yii2-toggle-column": "*",
-        "kartik-v/yii2-editable" : "*"
+        "kartik-v/yii2-editable" : "*",
+        "2amigos/yii2-tinymce-widget": "~1.1"
     },
     "autoload": {
         "psr-4": {

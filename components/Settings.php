@@ -116,7 +116,9 @@ class Settings extends Component
         $data = $this->getRawConfig();
 
         if (isset($data[$section][$key][0])) {
-            if ($data[$section][$key][1] !== 'object') {
+            if ($data[$section][$key][1] === 'wysiwyg') {
+                settype($data[$section][$key][0], 'string');
+            } elseif ($data[$section][$key][1] !== 'object') {
                 settype($data[$section][$key][0], $data[$section][$key][1]);
             }
         } else {

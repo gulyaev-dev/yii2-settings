@@ -8,8 +8,10 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use xti\settings\Module;
+use dosamigos\tinymce\TinyMceAsset;
 use \xti\settings\models\Setting;
 
+TinyMceAsset::register($this);
 /**
  * @var yii\web\View $this
  * @var xti\settings\models\Setting $model
@@ -51,3 +53,27 @@ use \xti\settings\models\Setting;
     <?php ActiveForm::end(); ?>
 
 </div>
+<?
+$type_field_id = Html::getInputId($model, 'type');
+$value_field_id = Html::getInputId($model, 'value');
+$js = <<<JS
+    var tinymce_options = {
+        "plugins": "code",
+        "directionality": "rtl",
+        "selector": "#$value_field_id"
+    };
+    if ($('#$type_field_id').val() === 'wysiwyg') {
+        tinymce.init(tinymce_options);
+    }
+    $('#$type_field_id').on('change', function() {
+      if( this.value === 'wysiwyg' ){
+        tinymce.init(tinymce_options);
+      } else {
+        tinymce.execCommand('mceRemoveEditor', true, '$value_field_id');
+      }
+    })
+JS;
+
+$this->registerJs($js);
+
+?>

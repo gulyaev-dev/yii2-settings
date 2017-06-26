@@ -28,6 +28,7 @@ class Setting extends BaseSetting
     {
         $values = [
             'string' => ['value', 'string'],
+            'wysiwyg' => ['value', 'string'],
             'integer' => ['value', 'integer'],
             'boolean' => ['value', 'boolean', 'trueValue' => "1", 'falseValue' => "0", 'strict' => true],
             'float' => ['value', 'number'],

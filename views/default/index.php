@@ -64,9 +64,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'value',
                     'value' => function($model){
                         return '
-                        <span class="editable" data-name="value" data-value="'.$model->value.'" data-setting_id="'.$model->id.'">'
-                        .$model->value.
-                        '</span>';
+                        <pre class="editable" data-name="value" data-value="'.htmlentities($model->value).'" data-setting_id="'.$model->id.'">'
+                        .htmlentities($model->value).
+                        '</pre>';
                     },
                     'format' => 'raw'
                 ],
@@ -84,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
     $this->registerJs("
 	$('.editable').each(function() {
         $(this).editable({
-            mode: 'popup',
+            type: 'textarea',
             url: '".Url::to('/settings/ajax/update-field')."',
             pk: Number($(this).data('setting_id')),
             params : {
